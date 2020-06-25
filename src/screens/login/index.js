@@ -64,12 +64,12 @@ const Login = (props) => {
             <Text style={styles.text}>LOGIN WITH GITHUB</Text>
           </TouchableOpacity>
         </View>
-        <View>
+        {/* <View>
           <TouchableOpacity style={styles.login} onPress={logout}>
             <Icon name="github" size={30} color="white" />
             <Text style={styles.text}>LOGOUT</Text>
           </TouchableOpacity>
-        </View>
+        </View> */}
       </View>
     </Baselayout>
   );
