@@ -1,12 +1,12 @@
 import React from 'react';
-import {View, Text, TouchableOpacity} from 'react-native';
+import {Text, TouchableOpacity} from 'react-native';
 import Baselayout from '../../components/shared/Baselayout';
 const Login = (props) => {
-  const {navigation} = props;
+  const {onPress} = props;
   return (
     <Baselayout>
       <Text>Hello world Login</Text>
-      <TouchableOpacity onPress={() => navigation.navigate('Landing-page')}>
+      <TouchableOpacity onPress={onPress}>
         <Text>Login</Text>
       </TouchableOpacity>
     </Baselayout>

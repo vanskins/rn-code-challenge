@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 import {createDrawerNavigator} from '@react-navigation/drawer';
@@ -19,16 +19,17 @@ const createDrawerNavigation = () => {
   );
 };
 const Index = (props) => {
+  const [isSignedIn, setIsSignedIn] = useState(false)
   return (
     <NavigationContainer>
-      <Stack.Navigator
-        initialRouteName="Login"
-        screenOptions={{
-          headerShown: false,
-        }}>
-        <Stack.Screen name="Login" component={Login} />
-        <Stack.Screen name="Landing-page" children={createDrawerNavigation} />
-      </Stack.Navigator>
+      {isSignedIn ? (
+        <Drawer.Navigator>
+          <Drawer.Screen name="Landing-page" component={LandingPage} />
+          <Drawer.Screen name="Weather" component={Weather} />
+        </Drawer.Navigator>
+      ) : (
+        <Login onPress={() => setIsSignedIn(true)} />
+      )}
     </NavigationContainer>
   );
 };
