@@ -67,7 +67,7 @@ const Index = (props) => {
       .then((credentials) => {
         const {accessToken} = credentials;
         storeData('accessToken', accessToken);
-        // setIsSignedIn(true);
+        setIsSignedIn(true);
       })
       .catch((error) => console.log(error));
   };

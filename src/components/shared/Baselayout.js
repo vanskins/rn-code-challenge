@@ -19,11 +19,11 @@ const Baselayout = (props) => {
   return (
     <>
       <StatusBar barStyle="dark-content" />
-      <ScrollView
+      {/* <ScrollView
         contentInsetAdjustmentBehavior="automatic"
-        style={styles.scrollView}>
+        style={styles.scrollView}> */}
         <SafeAreaView>{props.children}</SafeAreaView>
-      </ScrollView>
+      {/* </ScrollView> */}
     </>
   );
 };
