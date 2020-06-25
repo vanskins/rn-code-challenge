@@ -53,14 +53,31 @@ const LandingPage = (props) => {
   const [userProfile, setUserProfile] = useState({});
   const [location, setLocation] = useState({});
   const [showLocation, setShowLocation] = useState(false);
+  const [token, setToken] = useState(false);
+  useEffect(() => {
+    const getData = async () => {
+      try {
+        const value = await AsyncStorage.getItem('accessToken');
+        if (value !== null) {
+          setToken(value);
+        } else {
+          setToken(false);
+        }
+      } catch (e) {
+        setToken(false);
+      }
+    };
+    getData();
+  }, []);
+
   useEffect(() => {
     const profile = async () => {
-      const res = await getUserProfile();
+      const res = await getUserProfile(token);
       setUserProfile(res);
       return res;
     };
     profile();
-  }, []);
+  }, [token]);
 
   useEffect(() => {
     const getData = async () => {

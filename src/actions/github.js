@@ -1,17 +1,21 @@
 import axios from 'axios';
 
-const apiConfig = {
-  baseURL: 'https://dev-4ccxy-21.us.auth0.com',
-  headers: {
-    'Content-type': 'application/json',
-    Accept: 'application/vnd.github.v3+json',
-    Authorization: 'Bearer kFPBNfbMEaIeStxnGKQHiB_Hj0KKjU7M',
-  },
-};
+const apix = (token) => {
+  const apiConfig = {
+    baseURL: 'https://dev-4ccxy-21.us.auth0.com',
+    headers: {
+      'Content-type': 'application/json',
+      Accept: 'application/vnd.github.v3+json',
+      Authorization: `Bearer ${token}`,
+    },
+  };
+  
+  const api = axios.create(apiConfig);
+  return api;
+}
 
-const api = axios.create(apiConfig);
-export const getUserProfile = () => {
-  return api
+export const getUserProfile = (token) => {
+  return apix(token)
     .get('/userinfo')
     .then((response) => {
       return response.data;

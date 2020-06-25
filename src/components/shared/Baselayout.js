@@ -20,6 +20,7 @@ const styles = StyleSheet.create({
   scrollView: {
     backgroundColor: Colors.lighter,
   },
+  logout: {alignSelf: 'flex-end', marginRight: 10},
 });
 const Baselayout = (props) => {
   const removeValue = async () => {
@@ -46,7 +47,7 @@ const Baselayout = (props) => {
       <StatusBar barStyle="dark-content" />
       <SafeAreaView>
         {props.logout && (
-          <View style={{alignSelf: 'flex-end', marginRight: 10}}>
+          <View style={styles.logout}>
             <TouchableOpacity onPress={logout}>
               <Text>Logout</Text>
             </TouchableOpacity>
