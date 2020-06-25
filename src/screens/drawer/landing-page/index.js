@@ -97,7 +97,7 @@ const LandingPage = (props) => {
     setShowLocation(!showLocation);
   };
   return (
-    <Baselayout logout={true}>
+    <Baselayout navigation={props.navigation} logout={true}>
       <View style={styles.imageContainer}>
         <Image
           style={styles.stretch}

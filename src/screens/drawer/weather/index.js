@@ -45,7 +45,7 @@ const Weather = (props) => {
   });
 
   return (
-    <Baselayout logout={true}>
+    <Baselayout navigation={props.navigation} logout={true}>
       <Text style={style.title}>Weather Forecast</Text>
       <View style={style.table}>
         <View style={style.th}>
