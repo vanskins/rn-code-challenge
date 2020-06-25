@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import {Platform} from 'react-native';
+import {Platform, PermissionsAndroid} from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
 import {createDrawerNavigator} from '@react-navigation/drawer';
 import Geolocation from 'react-native-geolocation-service';
@@ -9,7 +9,6 @@ import Login from './screens/login';
 import LandingPage from './screens/drawer/landing-page';
 import Weather from './screens/drawer/weather';
 import Auth0 from 'react-native-auth0';
-
 
 const auth0 = new Auth0({
   domain: 'dev-4ccxy-21.us.auth0.com',
@@ -26,7 +25,22 @@ const Index = (props) => {
       const result = await Geolocation.requestAuthorization('always');
       return result;
     };
-    Platform.OS === 'ios' && auth();
+    const askAndroid = async () => {
+      const granted = await PermissionsAndroid.request(
+        PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
+        {
+          title: 'Example App',
+          message: 'Example App access to your location ',
+        },
+      );
+      return granted;
+    };
+
+    if (Platform.OS === 'ios') {
+      auth();
+    } else {
+      askAndroid();
+    }
 
     Geolocation.getCurrentPosition(
       (position) => {
@@ -45,6 +59,8 @@ const Index = (props) => {
         if (value !== null) {
           setIsInitializing(false);
           setIsSignedIn(true);
+        } else {
+          setIsInitializing(false);
         }
       } catch (e) {
         setIsInitializing(false);

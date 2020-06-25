@@ -52,7 +52,7 @@ const styles = StyleSheet.create({
 const Login = (props) => {
   const {onPress} = props;
   return (
-    <Baselayout>
+    <Baselayout logout={false}>
       <View style={styles.headerContainer}>
         <Text style={styles.title}>Welcome</Text>
         <Text style={styles.subTitle}>Weather App powered by RN</Text>
