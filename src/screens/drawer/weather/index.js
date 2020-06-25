@@ -4,6 +4,8 @@ import moment from 'moment';
 
 import Baselayout from '../../../components/shared/Baselayout';
 import {getWeatherForcast} from '../../../actions/weather';
+import AsyncStorage from '@react-native-community/async-storage';
+
 const style = StyleSheet.create({
   table: {flexDirection: 'row', justifyContent: 'space-around', margin: 10},
   table2: {
@@ -20,19 +22,34 @@ const style = StyleSheet.create({
 const PAGE = Dimensions.get('window');
 const Weather = (props) => {
   const [data, setData] = useState([]);
+  const [location, setLocation] = useState({});
   const [windowScreen, setWindowScreen] = useState(PAGE);
   useEffect(() => {
+    const getData = async () => {
+      try {
+        const value = await AsyncStorage.getItem('location');
+        if (value !== null) {
+          setLocation(JSON.parse(value));
+        }
+      } catch (e) {
+        console.log('error');
+      }
+    };
+    getData();
+  }, []);
+  useEffect(() => {
     const forcast = async () => {
+      const {latitude, longitude} = location;
       const result = await getWeatherForcast({
-        latitude: 8.130604,
-        longitude: 125.127655,
+        latitude,
+        longitude,
       });
       setData(result.data.list);
       return result;
     };
 
     forcast();
-  }, []);
+  }, [location]);
   const onChange = ({window}) => {
     setWindowScreen({...window});
   };

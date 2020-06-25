@@ -20,9 +20,11 @@ const Drawer = createDrawerNavigator();
 const Index = (props) => {
   const [isSignedIn, setIsSignedIn] = useState(false);
   const [isInitializing, setIsInitializing] = useState(true);
+  const [locGranted, setGranted] = useState(false);
   useEffect(() => {
     const auth = async () => {
       const result = await Geolocation.requestAuthorization('always');
+      setGranted(true);
       return result;
     };
     const askAndroid = async () => {
@@ -33,6 +35,7 @@ const Index = (props) => {
           message: 'Example App access to your location ',
         },
       );
+      setGranted(true);
       return granted;
     };
 
@@ -41,7 +44,9 @@ const Index = (props) => {
     } else {
       askAndroid();
     }
+  }, []);
 
+  useEffect(() => {
     Geolocation.getCurrentPosition(
       (position) => {
         const {longitude, latitude} = position.coords;
@@ -50,7 +55,7 @@ const Index = (props) => {
       (error) => console.log(error.message),
       {enableHighAccuracy: true, timeout: 20000, maximumAge: 1000},
     );
-  }, []);
+  }, [locGranted]);
 
   useEffect(() => {
     const getData = async () => {
