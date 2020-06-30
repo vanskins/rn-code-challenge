@@ -16,9 +16,20 @@ react-native run-android
 ```
 ### For ios
 ```bash
-react-native run-ios
+cd ios && pod install
+
+open AwesomeProject.xcodeproj
 ```
+ Then run the project using xcode.
+
+### Versions
+- Node v10.15.3 
+- npm 6.14.3
+- react-native-cli: 2.0.1
+- react-native: 0.62.2
+- Xcode Version 11.5
+- Android Studio Version 11.5
 
 ## Developer
-Van Alfred P. Sabacajan (Philippines)
+Van Alfred P. Sabacajan
 
