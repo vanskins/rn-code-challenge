@@ -16,6 +16,8 @@ react-native run-android
 ```
 ### For ios
 ```bash
+react-native link (inside the repository)
+
 cd ios && pod install
 
 open AwesomeProject.xcodeproj
